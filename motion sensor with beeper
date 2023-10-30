@@ -1,0 +1,37 @@
+// LDR sensor pin
+int ldrPin = A0;    // LDR is connected to analog pin A0
+// PIR sensor pin
+int pirPin = 2;     // PIR sensor is connected to digital pin 2
+// LED pin
+int ledPin = 13;    // LED is connected to digital pin 13
+
+void setup() {
+  pinMode(pirPin, INPUT);    // PIR sensor pin as input
+  pinMode(ledPin, OUTPUT);   // LED pin as output
+  Serial.begin(9600); // Start serial communication
+}
+
+void loop() {
+  int ldrValue = analogRead(ldrPin); // Read LDR sensor value
+
+  // Read PIR sensor value only if the light level is below a certain threshold
+  if (ldrValue > 500) {  // Adjust the LDR threshold as needed
+    int pirValue = digitalRead(pirPin); // Read PIR sensor value
+
+    Serial.print("LDR Value: ");
+    Serial.print(ldrValue);
+    Serial.print(" | PIR Value: ");
+    Serial.println(pirValue);
+
+    // If motion is detected
+    if (pirValue == HIGH) {
+      digitalWrite(ledPin, HIGH); // Turn on LED
+    } else {
+      digitalWrite(ledPin, LOW); // Turn off LED
+    }
+  } else {
+    digitalWrite(ledPin, LOW); // Turn off LED if there's sufficient light
+  }
+
+  delay(100); // Delay for stability
+}
