@@ -1,6 +1,6 @@
 #include <Wire.h> // Library for I2C communication
 #include <LiquidCrystal_I2C.h> // Library for LCD
-LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2); // Change to (0x27,16,2) for 16x2 LCD.my address is (0x3F)
+LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2); 
 
 int trigPin = A0;
 int echoPin = A1;
